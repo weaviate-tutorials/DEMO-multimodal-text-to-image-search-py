@@ -27,8 +27,8 @@ function import_with_go() {
   cd ./import/go && cmd_go go mod vendor; go run cmd/main.go && cd -
 }
 
-run_go=false
-run_curl=true
+run_go=true
+run_curl=false
 
 while [[ "$#" -gt 0 ]]; do
   case $1 in
@@ -53,5 +53,31 @@ then
   import_with_go
 fi
 
-cd frontend && yarn && yarn start
+
+
+##Create and activate virtual env
+# check the OS 
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
+  # Windows
+  python -m venv venv
+  source venv/Scripts/activate
+else
+  # macOS or Linux
+  python -m venv venv
+  source venv/bin/activate
+fi
+
+echo "VENV: created and activated"
+
+##Change to python/ 
+cd python
+
+#Install requirements
+pip install -r requirements.txt
+echo "COMPLETE: requirements.txt install"
+
+#Run python client
+## PYTHONUNBUFFERED=1 python app.py
+
+python "app.py"
 
