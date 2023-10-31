@@ -11,7 +11,8 @@ show_more_button_text = "Show More"
 @app.route("/", methods =["GET","POST"])
 def home():
 
-    
+    global show_more
+    global show_more_button_text
 
     if request.method == "POST":
         #Retrieve query from html form
@@ -19,7 +20,7 @@ def home():
 
         #Get results from db query
         results = search_query(query)
-
+        show_more = True
         return render_template('search_page.html', results = results, show_more = show_more, show_more_button_text = show_more_button_text, logo = None)
     
     else:

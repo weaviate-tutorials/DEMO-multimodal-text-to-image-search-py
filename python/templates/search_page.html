@@ -3,6 +3,8 @@
 <head>
     <title>Weaviate v1.14.1 CLIP Demo</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
     
 
 
@@ -30,21 +32,23 @@
             </div>
         </div>
         
-        <!--button toggle: @TODO: FIX-->
         <div class="control" style="padding-top: 20px;">
-            <input type="button" class="button is-info" value="{{ show_more_button_text }}" onclick="toggleShowMore()" style="background-color: #fa0171;">
+            <input id="show-more-button" type="button" value="{{show_more_button_text}}" class="button is-info" onclick="toggleShowMore()" style="background-color: #fa0171;">
         </div>
-        <!--<end>button toggle: @TODO: FIX-->
 
       
         {% if show_more %}
-        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; padding-top: 20px;">
-            {% for result in results.rest %}
-            <div>
-                <img style="max-height: 100px;" alt="Certainty: " src="data:image/jpg;base64, {{ result.image }}">
-                <div>Certainty: {{ "%0.2f" % (results.data.Get.MultiModal._additional.certainty * 100)}} % %</div>
+        <div id="more-content" style="display: none;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; padding-top: 20px;">
+                {% for i in range(results.data.Get.MultiModal | length) %}
+                    {% if i!= 0 %} <!--skip first result displated above-->
+                    <div>
+                        <img style="max-height: 100px;" alt="Certainty: " src="data:image/jpg;base64, {{ results.data.Get.MultiModal[i].image }}">
+                        <div>Certainty: {{ "%0.2f" % (results.data.Get.MultiModal[i]._additional.certainty * 100)}}  %</div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
         {% endif %}
         </div>

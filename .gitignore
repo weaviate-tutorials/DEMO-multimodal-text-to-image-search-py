@@ -2,3 +2,4 @@ import/go/vendor
 __pycache__/
 *.pyc
 python/readme.md
+venv/
