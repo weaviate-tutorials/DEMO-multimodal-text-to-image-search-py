@@ -7,28 +7,32 @@ This project's origin is [here](https://github.com/weaviate/weaviate-examples/tr
 The Multi-Modal Text/Image Search using CLIP project revolutionizes search capabilities by integrating CLIP technology, allowing users to search for images using natural language descriptions. Built on Weaviate, it supports multi-modal searches, combining text and images effortlessly. Users can describe images or provide images directly for contextual searches. The system is user-friendly, with a customizable interface and support for various image formats, ensuring a seamless and intuitive experience.
 
 ![Weaviate Multi-Modal Search](./weaviate-multi-modal-clip-search-demo.png)
-(TODO: Add demo video)
+
+<br>
+
+![Weaviate Multi-Modal Search Demo Video](./text_to_img_clip_demo.gif)
 
 This example application spins up a Weaviate instance using the
 [multi2vec-clip](https://www.semi.technology/developers/weaviate/current/modules/multi2vec-clip.html)
 module, imports a few sample images (you can add your own images, too!) and
-provides a very simple search frontend in [React](https://reactjs.org/) using
-the [Weaviate JS Client
-](https://www.semi.technology/developers/weaviate/current/client-libraries/javascript.html)
+provides a very simple search frontend in [Python](https://python.org/) using [Flask](https://pythonbasics.org/what-is-flask-python/) 
 
 Model Credits: This demo uses the [ckip-ViT-B32-multilingual-v1](https://huggingface.co/sentence-transformers/clip-ViT-B-32-multilingual-v1) model from [SBERT.net](https://sbert.net). Shoutout to Nils Reimers and his colleagues for the great Sentence Transformers models. 
 
 ## Prerequisites
 - Docker & Docker-Compose: Required to set up the Weaviate instance
 - Bash: Necessary for executing the provided setup scripts.
-- Node.js and npm/yarn: Optional for running the frontend locally.
+- Python and pip: Frontend is implemented in python, pip is needed to install `requirements.txt`
 
 ## Setup instructions
 
-1. Start up Weaviate using `docker-compose up -d`
-2. Import the schema (the script will wait for Weaviate to be ready) using `bash ./import/curl/create_schema.sh`
-3. Import the images using `bash ./import/curl/import.sh`
-4. To run the frontend navigate to the `./frontend` folder and run `yarn && yarn start`. Wait for your browser to open at `http://localhost:3000`
+1. Run Docker on your machine
+2. Run the `start.sh` script:
+`$ bash start.sh`
+3. Open Browser : `http://localhost:5000`
+4. To stop the server press: CTRL + C
+5. Use `stop.sh` script when finished:
+`$ bash stop.sh`
 
 ## Usage instructions
 
